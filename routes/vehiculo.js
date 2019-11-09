@@ -18,7 +18,7 @@ router
           })
     })
     .post((req,res) => {
-        const { nombre, marca, modelo, numeroDispositivo, uuidPadre } = req.body;
+        const { nombre, modelo, numeroDispositivo, uuidPadre } = req.body;
         //creo un nuevo vehiculo
         var vehiculoNuevo = new Vehiculo();
         //Creo un nuevo usuario
