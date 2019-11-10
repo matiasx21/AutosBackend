@@ -14,7 +14,6 @@ router
           })
         })
     .post((req,res) => {
-        console.log(req.body);
         const { celular,nombreUsuario,uuid, mail, password, nombreVehiculo,modelo, numeroDispositivo} = req.body;
         var usuarioNuevo = new Usuario();
         var vehiculoNuevo = new Vehiculo();
@@ -33,7 +32,7 @@ router
         usuarioNuevo.save();
         vehiculoNuevo.usuarios.push(usuarioNuevo);
         vehiculoNuevo.save((err) => {
-            res.json({message: "Se agrego nuevo usuario"});
+            res.json({message: "Se agrego nuevo usuario"},usuarioNuevo.id);
         })
     })
 
