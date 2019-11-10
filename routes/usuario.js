@@ -32,7 +32,7 @@ router
         usuarioNuevo.save();
         vehiculoNuevo.usuarios.push(usuarioNuevo);
         vehiculoNuevo.save((err) => {
-            res.json({message: "Se agrego nuevo usuario"},usuarioNuevo.id);
+            res.json({message: "Se agrego nuevo usuario",id:usuarioNuevo.id});
         })
     })
 
