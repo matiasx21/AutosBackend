@@ -18,7 +18,7 @@ router
           })
     })
     .post((req,res) => {
-        const { nombre, modelo, numeroDispositivo, uuidPadre } = req.body;
+        const { nombre, modelo, codigoDispositivo, uuidPadre } = req.body;
         //creo un nuevo vehiculo
         var vehiculoNuevo = new Vehiculo();
         //Creo un nuevo usuario
@@ -35,7 +35,7 @@ router
             /*vehiculoNuevo.nombre = nombre;
             vehiculoNuevo.marca = marca;
             vehiculoNuevo.modelo = modelo;
-            vehiculoNuevo.numeroDispositivo = numeroDispositivo;
+            vehiculoNuevo.codigoDispositivo = codigoDispositivo;
             vehiculoNuevo.uuidPadre = uuidPadre;
             //Inserte el usuario en la lista de usuarios del vehiculo
             vehiculoNuevo.usuarios.push(usuario);
@@ -61,12 +61,12 @@ router
     });
 
     router
-        .route("/vehiculo/:numeroDispositivo")
+        .route("/vehiculo/:codigoDispositivo")
         .get((req,res) => {
             //Guardo el numero de dispositivo en una variable
-            const numDisp = req.params.numeroDispositivo;
+            const numDisp = req.params.codigoDispositivo;
             //Busco el vehiculo por numero de dispositivo
-            Vehiculo.findOne({'numeroDispositivo':numDisp})
+            Vehiculo.findOne({'codigoDispositivo':numDisp})
             //Obtengo los usuarios de ese vehiculo
             .populate('usuarios')
             .exec((err,vehiculo) => {
@@ -88,9 +88,9 @@ router
             //Obtengo los valores a modificar
             const { nombre,marca, codigoModelo}  = req.body;
             //Busco el vehiculo por el numero de dispositivo
-            const numDisp = req.params.numeroDispositivo;
+            const numDisp = req.params.codigoDispositivo;
             
-            Vehiculo.findOne({'numeroDispositivo':numDisp},function(err,Vehiculo){
+            Vehiculo.findOne({'codigoDispositivo':numDisp},function(err,Vehiculo){
                 try {
                     //Modifico las variables
                     Vehiculo.nombre = nombre;

@@ -6,7 +6,7 @@ var VehiculoSchema = new Schema({
     marca: String,
     modelo: String,
     uuidPadre: String,
-    numeroDispositivo: String,
+    codigoDispositivo: String,
     usuarios: [{ type: Schema.Types.ObjectId, ref: 'Usuario' }]
 });
 

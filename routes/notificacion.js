@@ -19,6 +19,7 @@ router
         nuevaNotificacion.tipoNotificacion = tipoNotificacion;
         nuevaNotificacion.numeroDispositivo = numeroDispositivo;
         nuevaNotificacion.fecha = fecha;
+        nuevaNotificacion.estado = false;
         nuevaNotificacion.save((err) => {
             //Si hubo error lo retorno
             if(err) res.json(err);
