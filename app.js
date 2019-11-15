@@ -6,6 +6,9 @@ var usuarioRouter = require("./routes/usuario");
 var vehiculoRouter = require("./routes/vehiculo");
 var notificacionRouter = require("./routes/notificacion");
 var tipoNotificacionRouter = require("./routes/tipoNotificacion");
+var ubicacionRouter = require("./routes/ubicacion");
+var mantenimientoRouter = require("./routes/mantenimiento");
+var recargaCombustibleRouter = require("./routes/recargaCombustible");
 var crearVehiculo = require("./routes/crearVehiculo");
 var app = express();
 
@@ -25,6 +28,9 @@ app.use('/api', usuarioRouter);
 app.use('/api',vehiculoRouter);
 app.use('/api',notificacionRouter);
 app.use('/api',tipoNotificacionRouter);
+app.use('/api',ubicacionRouter);
+app.use('/api',mantenimientoRouter);
+app.use('/api',recargaCombustibleRouter);
 app.use('/api',crearVehiculo);
 
 mongoose.connect(config.mongo_url, { useNewUrlParser: true, useUnifiedTopology: true  })

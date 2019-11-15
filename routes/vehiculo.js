@@ -26,14 +26,9 @@ router
         //Busco al usuario por uuid.
         var usu =  Usuario.findOne({'uuid':uuidPadre},function(err,usuario2){
             usuario = usuario2;
-            console.log(usuario);
-        })
-
-        usuario = usu;
 
         if(usuario != null){
-            /*vehiculoNuevo.nombre = nombre;
-            vehiculoNuevo.marca = marca;
+            vehiculoNuevo.nombre = nombre;
             vehiculoNuevo.modelo = modelo;
             vehiculoNuevo.codigoDispositivo = codigoDispositivo;
             vehiculoNuevo.uuidPadre = uuidPadre;
@@ -52,10 +47,13 @@ router
                     if(err) res.json(err);
                     res.json({message: "Se agrego nuevo vehiculo correctamente"});
             });
-            })*/
+            })
             //console.log("entre",usuario);
 
         }
+        })
+
+        
 
 
     });

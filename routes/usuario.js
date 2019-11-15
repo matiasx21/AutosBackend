@@ -61,6 +61,8 @@ router
             })
         })
         .put((req,res) => {
+            //Guardo el uuid en una variable
+            const userUuid = req.params.uuid;
             //Obtengo los valores a modificar
             const { celular,nombre }  = req.body;
             //Busco el vehiculo por el numero de dispositivo

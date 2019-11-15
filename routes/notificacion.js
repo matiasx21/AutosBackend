@@ -13,11 +13,11 @@ router
     })
     .post((req,res) => {
         //Obtengo los datos de la request
-        const {tipoNotificacion, numeroDispositivo, fecha} = req.body;
+        const {tipoNotificacion, codigoDispositivo, fecha} = req.body;
         //Creo una nueva notificacion
         var nuevaNotificacion = new Notificacion();
         nuevaNotificacion.tipoNotificacion = tipoNotificacion;
-        nuevaNotificacion.numeroDispositivo = numeroDispositivo;
+        nuevaNotificacion.codigoDispositivo = codigoDispositivo;
         nuevaNotificacion.fecha = fecha;
         nuevaNotificacion.estado = false;
         nuevaNotificacion.save((err) => {
@@ -29,10 +29,10 @@ router
     });
 
     router
-        .route("/notificacion/:numeroDispositivo")
+        .route("/notificacion/:codigoDispositivo")
         .get((req,res) => {
-            var numDisp = req.params.numeroDispositivo;
-            Notificacion.findOne({'numeroDispositivo':numDisp},function(err,Notificacion){
+            var codDis = req.params.codigoDispositivo;
+            Notificacion.find({'codigoDispositivo':codDis},function(err,Notificacion){
                 try {
                     res.json(Notificacion);
                 } catch (err) {
@@ -41,24 +41,20 @@ router
             })
         });
 
-        // FALTARIA HACER UN GET BY NUMERO DE DISPOSITIVO BY TIPO DE NOTIFICACION (AMBOS)
         router
-        .route("/notificacion/:numeroDispositivo/:tipoNotificacion")
+        .route("/notificacion/:codigoDispositivo/:tipoNotificacion")
         .get((req,res) => {
-            var numDisp = req.params.numeroDispositivo;
+            var codDis = req.params.codigoDispositivo;
             var tipoNot = req.params.tipoNotificacion;
-            Notificacion.findOne({'numeroDispositivo':numDisp,'tipoNotificacion':tipoNot},function(err,Notificacion){
+            Notificacion.find({'codigoDispositivo':codDis,'tipoNotificacion':tipoNot},function(err,Notificacion){
                 try {
                     res.json(Notificacion);
                 } catch (err) {
                     res.json({message: "El numero de dispositivo no se encuentra registrado o no posee notificaciones de ese tipo"});
                 }
-            })
+            })//.sort({$natural:-1}).limit(1)
         });
-
         
-
-        ;
 
     module.exports = router;
     

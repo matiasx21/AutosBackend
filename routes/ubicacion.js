@@ -3,34 +3,31 @@ var router = express.Router();
 var Ubicacion = require("../models/ubicacion");
 
 
-//ARREGLAR, HAY QUE FILTRAR Y QUEDARSE CON LA QUE TENGA LA FECHA MAS GRANDE.
     router
-        .route("/ubicacion/:numeroDispositivo")
+        .route("/ubicacion/:codigoDispositivo")
         .get((req,res) => {
             //Guardo el numero de dispositivo en una variable.
-            var numDisp = req.params.numeroDispositivo;
+            var codDisp = req.params.codigoDispositivo;
             //Obtengo las ubicaciones del vehiculo por numero de dispositivo
-            Ubicacion.findOne({'numeroDispositivo':numDisp},function(err,Ubicacion){
+            Ubicacion.find({'codigoDispositivo':codDisp},function(err,ubicacion){
                 try {
-                    //Filtro y me quedo con la ultima ubicacion
-                    var ubi = Ubicacion.sort({$natural:-1}).limit(1);
                     //Retorno la ubicacion
-                    res.json(ubi);
+                    res.json(ubicacion);
                 } catch (err) {
                     //Si hubo erro lo muestro
-                    res.json({message: "No se ecuentra ninguna ubicacion con ese numero de dispositivo"});
+                    res.json({message: "No se ecuentra ninguna ubicacion con ese codigo de dispositivo"});
                 }
-            })
+            }).sort({$natural:-1}).limit(1)
         })
         .post((req,res) => {
             //Guardo el numero de dispositivo en una variable.
-            var numDisp = req.params.numeroDispositivo;
+            var codDisp = req.params.codigoDispositivo;
             //Obtengo los datos de la request
-            const {fecha, latitud,longitud} = req.body;
+            const {latitud,longitud} = req.body;
             //Creo una nueva notificacion
             var nuevaUbicacion = new Ubicacion();
-            nuevaUbicacion.numeroDispositivo = numDisp;
-            nuevaUbicacion.fecha = fecha;
+            nuevaUbicacion.codigoDispositivo = codDisp;
+            nuevaUbicacion.fecha = new Date();
             nuevaUbicacion.latitud = latitud;
             nuevaUbicacion.longitud = longitud;
             nuevaUbicacion.save((err) => {
@@ -40,19 +37,20 @@ var Ubicacion = require("../models/ubicacion");
                 res.json({message: "Se agrego una nueva Ubicacion"});
             });
         })
-        // FALTARIA HACER UN DELETE, DEL DIA ANTERIOR.
         .delete((req,res) => {
             //Guardo el numero de dispositivo en una variable.
-            var numDisp = req.params.numeroDispositivo;
-            //Creo una nueva notificacion
-            var ubi = new Ubicacion();
-            ubi.find({'numeroDispositivo':numDisp});
-
-            ubi.deleteMany((err) => {
-                //Si hubo error lo retorno
-                if(err) res.json(err);
-                //Muestro mensaje
-                res.json({message: "Se eliminaron ubicaciones viejas"});
+            var codDisp = req.params.codigoDispositivo;
+            var fecha = new Date();
+            console.log(fecha);
+            fecha.setDate(fecha.getDate() - 1);
+            Ubicacion.deleteMany({'codigoDispositivo':codDisp,'fecha':fecha},function(err,ubicacion){
+                try {
+                    //Retorno la ubicacion
+                    res.json({message: "Se eliminaron ubicaciones viejas"});
+                } catch (err) {
+                    //Si hubo erro lo muestro
+                    res.json({message: "No se ecuentra ninguna ubicacion con ese codigo de dispositivo"});
+                }
             });
         });
 
