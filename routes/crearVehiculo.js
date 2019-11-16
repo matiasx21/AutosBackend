@@ -70,11 +70,23 @@ router
             //Muestro mensaje
             res.json({message: "Se agrego un nuevo modelo"});
         });
-    })
+    });
+    router
+    .route("/modelo/:codigoTipoV")
+    .get((req,res) => {
+        const tipoV = req.params.codigoTipoV;
+        Modelo.findOne({'codigoTipoV':tipoV},function(err,unModelo){
+            try {
+                res.json(unModelo);
+            } catch (err) {
+                res.json({message: "No se encontraron modelos para ese tipo de marca y vehiculo"});
+            }
+        })
+    });
+
     router
     .route("/modelo/:codigoTipoV/:codigoMarca")
     .get((req,res) => {
-        //revisar si filtra por los dos parametros
         const marca = req.params.codigoMarca;
         const tipoV = req.params.codigoTipoV;
         Modelo.find({'codigoTipoV':tipoV,'codigoMarca':marca},function(err,Modelos){
@@ -84,7 +96,8 @@ router
                 res.json({message: "No se encontraron modelos para ese tipo de marca y vehiculo"});
             }
         })
-    })
+    });
+
 
     module.exports = router;
     

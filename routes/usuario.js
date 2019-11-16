@@ -14,10 +14,10 @@ router
           })
         })
     .post((req,res) => {
-        const { celular,nombreUsuario,uuid, mail, password, nombreVehiculo,modelo, codigoDispositivo} = req.body;
+        const { numeroCelular,nombreUsuario,uuid, mail, password, nombreVehiculo,modelo, codigoDispositivo} = req.body;
         var usuarioNuevo = new Usuario();
         var vehiculoNuevo = new Vehiculo();
-        usuarioNuevo.celular = celular;
+        usuarioNuevo.celular = numeroCelular;
         usuarioNuevo.nombre = nombreUsuario;
         usuarioNuevo.uuid = uuid;
         usuarioNuevo.mail = mail;
@@ -34,11 +34,11 @@ router
         vehiculoNuevo.save((err) => {
             res.json({message: "Se agrego nuevo usuario",id:usuarioNuevo.id});
         })
-    })
+    });
 
-    router
-        .route("/usuario/:uuid")
-        .get((req,res) => {
+router
+    .route("/usuario/:uuid")
+    .get((req,res) => {
             //Guardo el uuid en una variable
             const userUuid = req.params.uuid;
             //Busco el usuario por uuid
@@ -83,8 +83,8 @@ router
                     res.json({message: "El celular no se encuentra registrado"})
                 }
             })
-        })
-
+        });
+;
 
         // FALTARIA HACER UN DELETE, PERO ES LOGICO, COMO SERIA?
 

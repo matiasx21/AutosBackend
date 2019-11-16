@@ -3,6 +3,7 @@ var router = express.Router();
 var Vehiculo = require("../models/vehiculo");
 var Usuario = require("../models/usuario");
 
+
 router
     .route("/vehiculo")
     .get((req,res) => {
@@ -58,56 +59,58 @@ router
 
     });
 
-    router
-        .route("/vehiculo/:codigoDispositivo")
-        .get((req,res) => {
-            //Guardo el numero de dispositivo en una variable
-            const numDisp = req.params.codigoDispositivo;
-            //Busco el vehiculo por numero de dispositivo
-            Vehiculo.findOne({'codigoDispositivo':numDisp})
-            //Obtengo los usuarios de ese vehiculo
-            .populate('usuarios')
-            .exec((err,vehiculo) => {
-                if (err) {
-                    //Si hubo error lo muestro
-                    res.json(err);
-                  } else {
-                    //Si no encontro el vehiculo lo informo
-                    if (!vehiculo) {
-                      res.json('No existe el numero de dispositivo');
-                    } else {
-                      //Devuelvo el vehiculo
-                      res.json(vehiculo);
-                    }
-            }
-            })
-        })
-        .put((req,res) => {
-            //Obtengo los valores a modificar
-            const { nombre,marca, codigoModelo}  = req.body;
-            //Busco el vehiculo por el numero de dispositivo
-            const numDisp = req.params.codigoDispositivo;
-            
-            Vehiculo.findOne({'codigoDispositivo':numDisp},function(err,Vehiculo){
-                try {
-                    //Modifico las variables
-                    Vehiculo.nombre = nombre;
-                    Vehiculo.marca = marca;
-                    Vehiculo.modelo = codigoModelo;
-                    //Guardo el vehiculo
-                    Vehiculo.save((err) => {
-                        //Si hubo error lo muestro
-                        if(err) res.json(err);
-                        //Informo que se guardo correctamente
-                        res.json({message: "Se modifico el vehiculo correctamente"})
-                    });
-                }
-                catch (err) {
-                    res.json({message: "El numero de dispositivo no se encuentra registrado"})
-                }
-            })
-        })
-        // FALTARIA HACER UN DELETE, UNO LOGICO PARA EL USUARIO CREADOR Y OTRO REAL DE RELACION PARA OTROS USUARIOS
+   
 
+router
+.route("/vehiculo/:codigoDispositivo")
+.get((req,res) => {
+    console.log("bien");
+    //Guardo el numero de dispositivo en una variable
+    const numDisp = req.params.codigoDispositivo;
+    //Busco el vehiculo por numero de dispositivo
+    Vehiculo.findOne({'codigoDispositivo':numDisp})
+    //Obtengo los usuarios de ese vehiculo
+    .populate('usuarios')
+    .exec((err,vehiculo) => {
+        if (err) {
+            //Si hubo error lo muestro
+            res.json(err);
+          } else {
+            //Si no encontro el vehiculo lo informo
+            if (!vehiculo) {
+              res.json('No existe el numero de dispositivo');
+            } else {
+              //Devuelvo el vehiculo
+              res.json(vehiculo);
+            }
+    }
+    })
+})
+.put((req,res) => {
+    //Obtengo los valores a modificar
+    const { nombre,marca, codigoModelo}  = req.body;
+    //Busco el vehiculo por el numero de dispositivo
+    const numDisp = req.params.codigoDispositivo;
+    
+    Vehiculo.findOne({'codigoDispositivo':numDisp},function(err,Vehiculo){
+        try {
+            //Modifico las variables
+            Vehiculo.nombre = nombre;
+            Vehiculo.marca = marca;
+            Vehiculo.modelo = codigoModelo;
+            //Guardo el vehiculo
+            Vehiculo.save((err) => {
+                //Si hubo error lo muestro
+                if(err) res.json(err);
+                //Informo que se guardo correctamente
+                res.json({message: "Se modifico el vehiculo correctamente"})
+            });
+        }
+        catch (err) {
+            res.json({message: "El numero de dispositivo no se encuentra registrado"})
+        }
+    })
+})
+// FALTARIA HACER UN DELETE, UNO LOGICO PARA EL USUARIO CREADOR Y OTRO REAL DE RELACION PARA OTROS USUARIOS
 
     module.exports = router;
