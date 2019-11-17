@@ -13,12 +13,12 @@ router
     })
     .post((req,res) => {
         //Obtengo los datos de la request
-        const {tipoNotificacion, codigoDispositivo, fecha} = req.body;
+        const {tipoNotificacion, codigoDispositivo} = req.body;
         //Creo una nueva notificacion
         var nuevaNotificacion = new Notificacion();
         nuevaNotificacion.tipoNotificacion = tipoNotificacion;
         nuevaNotificacion.codigoDispositivo = codigoDispositivo;
-        nuevaNotificacion.fecha = fecha;
+        nuevaNotificacion.fecha = Date.now();
         nuevaNotificacion.estado = false;
         nuevaNotificacion.save((err) => {
             //Si hubo error lo retorno
@@ -32,9 +32,9 @@ router
         .route("/notificacion/:codigoDispositivo")
         .get((req,res) => {
             var codDis = req.params.codigoDispositivo;
-            Notificacion.find({'codigoDispositivo':codDis},function(err,Notificacion){
+            Notificacion.find({'codigoDispositivo':codDis},function(err,notificaciones){
                 try {
-                    res.json(Notificacion);
+                    res.json(notificaciones);
                 } catch (err) {
                     res.json({message: "El numero de dispositivo no se encuentra registrado"});
                 }
