@@ -37,7 +37,7 @@ var Ubicacion = require("../models/ubicacion");
                     //Si hubo erro lo muestro
                     res.json({message: "No se ecuentra ninguna ubicacion con ese codigo de dispositivo"});
                 }
-            }).sort({$natural:-1}).limit(1)
+            }).sort({$natural:-1})
         })
         .delete((req,res) => {
             //Guardo el numero de dispositivo en una variable.

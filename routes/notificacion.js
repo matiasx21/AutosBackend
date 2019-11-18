@@ -38,7 +38,7 @@ router
                 } catch (err) {
                     res.json({message: "El numero de dispositivo no se encuentra registrado"});
                 }
-            })
+            }).sort({$natural:-1})
         });
 
         router
