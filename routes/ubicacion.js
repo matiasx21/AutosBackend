@@ -2,7 +2,31 @@ var express = require("express");
 var router = express.Router();
 var Ubicacion = require("../models/ubicacion");
 
-
+    router
+    .route("/ubicacion")
+    .post((req,res) => {
+        //Guardo el numero de dispositivo en una variable.
+        var codDisp = req.params.codigoDispositivo;
+        //Obtengo los datos de la request
+        const {latitud,longitud} = req.body;
+        //Creo una nueva notificacion
+        var nuevaUbicacion = new Ubicacion();
+        nuevaUbicacion.codigoDispositivo = codDisp;
+        var date = new Date();
+        var dia = date.getDate();
+        var mes = date.getMonth();
+        var anio = date.getFullYear();
+        nuevaUbicacion.fecha = dia + " / " + mes + " / " + anio;
+        nuevaUbicacion.latitud = latitud;
+        nuevaUbicacion.longitud = longitud;
+        nuevaUbicacion.save((err) => {
+            //Si hubo error lo retorno
+            if(err) res.json(err);
+            //Muestro mensaje
+            res.json({message: "Se agrego una nueva Ubicacion"});
+        });
+    })
+    ;
     router
         .route("/ubicacion/:codigoDispositivo")
         .get((req,res) => {
@@ -18,24 +42,6 @@ var Ubicacion = require("../models/ubicacion");
                     res.json({message: "No se ecuentra ninguna ubicacion con ese codigo de dispositivo"});
                 }
             }).sort({$natural:-1}).limit(1)
-        })
-        .post((req,res) => {
-            //Guardo el numero de dispositivo en una variable.
-            var codDisp = req.params.codigoDispositivo;
-            //Obtengo los datos de la request
-            const {latitud,longitud} = req.body;
-            //Creo una nueva notificacion
-            var nuevaUbicacion = new Ubicacion();
-            nuevaUbicacion.codigoDispositivo = codDisp;
-            nuevaUbicacion.fecha = new Date();
-            nuevaUbicacion.latitud = latitud;
-            nuevaUbicacion.longitud = longitud;
-            nuevaUbicacion.save((err) => {
-                //Si hubo error lo retorno
-                if(err) res.json(err);
-                //Muestro mensaje
-                res.json({message: "Se agrego una nueva Ubicacion"});
-            });
         })
         .delete((req,res) => {
             //Guardo el numero de dispositivo en una variable.
