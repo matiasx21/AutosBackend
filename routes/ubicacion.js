@@ -12,11 +12,7 @@ var Ubicacion = require("../models/ubicacion");
         //Creo una nueva notificacion
         var nuevaUbicacion = new Ubicacion();
         nuevaUbicacion.codigoDispositivo = codDisp;
-        var date = new Date();
-        var dia = date.getDate();
-        var mes = date.getMonth();
-        var anio = date.getFullYear();
-        nuevaUbicacion.fecha = dia + "-" + mes + "-" + anio;
+        nuevaUbicacion.fecha = new Date();
         nuevaUbicacion.latitud = latitud;
         nuevaUbicacion.longitud = longitud;
         nuevaUbicacion.save((err) => {
