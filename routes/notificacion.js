@@ -52,7 +52,7 @@ router
                 } catch (err) {
                     res.json({message: "El numero de dispositivo no se encuentra registrado o no posee notificaciones de ese tipo"});
                 }
-            })//.sort({$natural:-1}).limit(1)
+            }).sort({$natural:-1}).limit(1)
         });
         
 
