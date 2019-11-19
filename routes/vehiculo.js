@@ -37,9 +37,6 @@ router
             vehiculoNuevo.usuarios.push(usuario);
             //Inserto el vehiculo
             vehiculoNuevo.save((err,vehiculo) =>{
-                //Verifico que el vehiculo se inserto correctamente
-
-                //Si hubo error lo devuelvo
                 if(err) res.json(err);
                 //Si no hubo error inserto el vehiculo en la lista de vehiculos del usuario
                 usuario.vehiculos.push(vehiculo);
