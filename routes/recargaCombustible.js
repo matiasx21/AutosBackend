@@ -36,7 +36,7 @@ router
                 } catch (err) {
                     res.json({message: "El numero de dispositivo no se encuentra registrado o no posee registros de combustibles"});
                 }
-            })
+            }).sort({$natural:-1})
             })
 
 
