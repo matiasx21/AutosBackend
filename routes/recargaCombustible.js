@@ -12,7 +12,7 @@ router
         })
     })
     .post((req,res) => {
-        const { fecha, costo, litros, efectivo, codigoDispositivo} = req.body;
+        const {costo, litros, efectivo, codigoDispositivo} = req.body;
         var recargaCombustible = new RecargaCombustible();
         recargaCombustible.fecha = new Date();
         recargaCombustible.costo = costo;

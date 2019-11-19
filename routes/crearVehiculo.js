@@ -34,9 +34,7 @@ router
         })
     })
     .post((req,res) => {
-        //Obtengo los datos de la request
         const {codigo, descripcion} = req.body;
-        //Creo una nueva notificacion
         var nuevaMarca = new Marca();
         nuevaMarca.codigo = codigo;
         nuevaMarca.descripcion = descripcion;
@@ -56,9 +54,7 @@ router
         })
     })
     .post((req,res) => {
-        //Obtengo los datos de la request
         const {codigo, descripcion, codigoTipoV, codigoMarca} = req.body;
-        //Creo una nueva notificacion
         var nuevoModelo = new Modelo();
         nuevoModelo.codigo = codigo;
         nuevoModelo.descripcion = descripcion;

@@ -3,9 +3,9 @@ var Schema = mongoose.Schema;
 
 var RecargaCombustibleSchema = new Schema({
     fecha: {type:Date, requiered:true},
-    costo: String,
-    litros: String,
-    efectivo: Boolean,
+    costo: {type:String, requiered:true},
+    litros: {type:String, requiered:true},
+    efectivo: {type:Boolean, requiered:true},
     codigoDispositivo: {type:String, requiered:true}
 });
 

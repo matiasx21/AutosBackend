@@ -3,9 +3,7 @@ var Schema = mongoose.Schema;
 
 var MatenimientoSchema = new Schema({
     codigoTipoMantenimiento: {type:String, requiered:true},
-    descripcion: String,
-    tipoParametro:String,
-    parametro: String,
+    cantidadMeses: {type:String, requiered:true},
     fechaRegistro: Date,
     fechaAviso: Date,
     codigoDispositivo : {type:String, requiered:true}
