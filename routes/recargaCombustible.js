@@ -12,11 +12,12 @@ router
         })
     })
     .post((req,res) => {
-        const { fecha, costo, litros, codigoDispositivo} = req.body;
+        const { fecha, costo, litros, efectivo, codigoDispositivo} = req.body;
         var recargaCombustible = new RecargaCombustible();
         recargaCombustible.fecha = fecha,
         recargaCombustible.costo = costo,
         recargaCombustible.litros = litros,
+        recargaCombustible.efectivo = efectivo,
         recargaCombustible.codigoDispositivo = codigoDispositivo
         recargaCombustible.save((err) => {
             res.json({message: "Se agrego nuevo registro de combustible"});

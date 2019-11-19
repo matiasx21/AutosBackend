@@ -5,6 +5,7 @@ var RecargaCombustibleSchema = new Schema({
     fecha: {type:Date, requiered:true},
     costo: String,
     litros: String,
+    efectivo: Boolean,
     codigoDispositivo: {type:String, requiered:true}
 });
 
