@@ -3,6 +3,7 @@ var router = express.Router();
 var Usuario = require("../models/usuario");
 var Vehiculo = require("../models/vehiculo");
 
+
 router
     .route("/usuario")
     .get((req,res) => {
