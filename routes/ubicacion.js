@@ -5,13 +5,9 @@ var Ubicacion = require("../models/ubicacion");
     router
     .route("/ubicacion")
     .post((req,res) => {
-        //Guardo el numero de dispositivo en una variable.
-        var codDisp = req.params.codigoDispositivo;
-        //Obtengo los datos de la request
-        const {latitud,longitud} = req.body;
-        //Creo una nueva notificacion
+        const {latitud,longitud, codigoDispositivo} = req.body;
         var nuevaUbicacion = new Ubicacion();
-        nuevaUbicacion.codigoDispositivo = codDisp;
+        nuevaUbicacion.codigoDispositivo = codigoDispositivo;
         nuevaUbicacion.fecha = new Date();
         nuevaUbicacion.latitud = latitud;
         nuevaUbicacion.longitud = longitud;
