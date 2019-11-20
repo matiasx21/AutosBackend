@@ -15,7 +15,7 @@ router
           })
         })
     .post((req,res) => {
-        const { numeroCelular,nombreUsuario,uuid, mail, password, nombreVehiculo,modelo, codigoDispositivo, tipoVehiculo} = req.body;
+        const { numeroCelular,nombreUsuario,uuid, mail, password, nombreVehiculo,modelo, codigoDispositivo} = req.body;
         var usuarioNuevo = new Usuario();
         var vehiculoNuevo = new Vehiculo();
         usuarioNuevo.celular = numeroCelular;
