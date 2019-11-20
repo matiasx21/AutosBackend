@@ -3,7 +3,6 @@ var Schema = mongoose.Schema;
 
 var VehiculoSchema = new Schema({
     nombre: {type:String, requiered:true},
-    marca: {type:String, requiered:true},
     modelo: {type:String, requiered:true},
     uuidPadre: {type:String, requiered:true},
     codigoDispositivo: {type:String, requiered:true,unique:true},

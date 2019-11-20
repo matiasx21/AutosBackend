@@ -38,7 +38,7 @@ router
         mantenimiento.cantidadMeses = cantidadMeses;
         mantenimiento.fechaRegistro = new Date();
         var fechaAviso = new Date();
-        fechaAviso.setMonth(fechaAviso.getDate()+cantidadMeses);
+        fechaAviso.setMonth(fechaAviso.getMonth()+cantidadMeses);
         mantenimiento.fechaAviso = fechaAviso;
         mantenimiento.codigoDispositivo = codigoDispositivo;
         mantenimiento.save((err) => {
@@ -71,7 +71,7 @@ router
                     mantenimiento.cantidadMeses = cantidadMeses;
                     mantenimiento.fechaRegistro = new Date();
                     var fechaAviso = new Date();
-                    fechaAviso.setMonth(fechaAviso.getDate()+cantidadMeses);
+                    fechaAviso.setMonth(fechaAviso.getMonth()+cantidadMeses);
                     mantenimiento.fechaAviso = fechaAviso;
                     mantenimiento.codigoDispositivo = codigoDispositivo;
                     //Guardo el mantenimiento
