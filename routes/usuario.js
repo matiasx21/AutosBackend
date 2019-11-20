@@ -36,7 +36,6 @@ router
             res.json({message: "Se agrego nuevo usuario",id:usuarioNuevo.id});
         })
     });
-
 router
     .route("/usuario/:uuid")
     .get((req,res) => {
@@ -88,7 +87,5 @@ router
 ;
 
         // FALTARIA HACER UN DELETE, PERO ES LOGICO, COMO SERIA?
-
-
     module.exports = router;
     
