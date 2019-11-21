@@ -36,7 +36,6 @@ var Ubicacion = require("../models/ubicacion");
             }).sort({$natural:-1})
         })
         .delete((req,res) => {
-            //Guardo el numero de dispositivo en una variable.
             var codDisp = req.params.codigoDispositivo;
             var fecha = new Date();
             console.log(fecha);

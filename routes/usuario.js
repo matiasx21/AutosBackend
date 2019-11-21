@@ -39,7 +39,6 @@ router
 router
     .route("/usuario/:uuid")
     .get((req,res) => {
-            //Guardo el uuid en una variable
             const userUuid = req.params.uuid;
             //Busco el usuario por uuid
             Usuario.findOne({'uuid':userUuid})
